@@ -10,5 +10,4 @@ The default vaue of `-w` is 80.
 Exmple:
 
 ![example](https://github.com/zysidea/imgtotxt/blob/master/example.png)
-
-
+![example2](https://github.com/zysidea/imgtotxt/blob/master/example2.png)

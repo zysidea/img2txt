@@ -20,22 +20,27 @@ import (
 	"reflect"
 )
 
-var ascii = []string{
-	"@", "c","*", "+", ":", "."," ",
+var ascii = [7]string{
+	//" ",".", ":", "+","*", "c","@",
+	"@", "c", "*", "+", ":", ".", " ",
 }
 var (
-	path  string
-	width int
+	path    string
+	width   int
+	reverse bool
 )
 
 func write(img image.Image) {
 	writer := bufio.NewWriter(os.Stdout)
-	gray:=image.NewGray(img.Bounds())
+	gray := image.NewGray(img.Bounds())
 	for y := 0; y < gray.Rect.Max.Y; y++ {
 		for x := 0; x < gray.Rect.Max.X; x++ {
 			grayColor := color.GrayModel.Convert(img.At(x, y))
 			yv := reflect.ValueOf(grayColor).FieldByName("Y").Uint()
 			pos := int(yv * 6 / 255)
+			if reverse {
+				pos = len(ascii)-pos-1
+			}
 			writer.Write([]byte(ascii[pos]))
 		}
 		writer.WriteByte('\n')
@@ -82,6 +87,7 @@ func loadImage(path string) (img image.Image, err error) {
 func init() {
 	flag.StringVar(&path, "p", "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", "The source path of image.")
 	flag.IntVar(&width, "w", 80, "The width of output.")
+	flag.BoolVar(&reverse, "r", false, "Highlight the content.")
 	flag.Parse()
 }
 
@@ -94,7 +100,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	scaledImg:= scaleImage(img, width)
+	scaledImg := scaleImage(img, width)
 	write(scaledImg)
 
 }
