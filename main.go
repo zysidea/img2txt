@@ -21,7 +21,7 @@ import (
 )
 
 var ascii = []string{
-	"M", "N", "#", "*", "+", ":", ".",
+	"@", "c","*", "+", ":", "."," ",
 }
 var (
 	path  string
