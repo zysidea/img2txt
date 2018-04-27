@@ -50,7 +50,7 @@ func write(img image.Image) {
 
 func scaleImage(img image.Image, w int) image.Image {
 	r := img.Bounds()
-	h := (r.Max.Y * w * 10) / (r.Max.X * 16)
+	h := (r.Max.Y * w ) / (r.Max.X * 2)
 	img = resize.Resize(uint(w), uint(h), img, resize.Lanczos3)
 	return img
 }
