@@ -3,7 +3,7 @@ Usage:
 ```sh
   img2txt -p[path/url] -w[width] -r[highlight the content]
 ```
-The default vaue of `-p` is google' logo.
+The default vaue of `-p` is google's logo.
 
 The default vaue of `-w` is 80.
 
